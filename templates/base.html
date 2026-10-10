@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}MySIGB{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <p>MySIGB</p>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home:index' %}">Accueil</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer>
+        <p>MySIGB - Système de gestion de bibliothèque</p>
+    </footer>
+</body>
+</html>
