@@ -59,4 +59,4 @@ htmlcov/
 Thumbs.db
 
 # Sauvegardes locales (ex : dump PMB, ne pas committer)
-sql/
+/sql/
