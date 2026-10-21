@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}{{ plan.titre }} - Suivi - MySIGB{% endblock %}
+
+{% block content %}
+<p><a href="{% url 'changelog:index' %}">Retour au suivi</a></p>
+
+<h1>{{ plan.nom }} — {{ plan.titre }}</h1>
+
+{% if plan.contenu_html %}
+{{ plan.contenu_html|safe }}
+{% else %}
+<p>Plan sans contenu détaillé.</p>
+{% endif %}
+{% endblock %}

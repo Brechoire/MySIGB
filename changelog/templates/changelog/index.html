@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Suivi - MySIGB{% endblock %}
+
+{% block content %}
+<h1>Suivi des travaux</h1>
+
+{% if dernier %}
+<section>
+    <h2>Dernier Plan : {{ dernier.titre }}</h2>
+    <p>Numéro : {{ dernier.nom }}</p>
+    <p><a href="{% url 'changelog:detail' numero=dernier.nom %}">Voir le détail</a></p>
+</section>
+{% else %}
+<p>Aucun plan pour le moment.</p>
+{% endif %}
+
+<section>
+    <h2>Historique</h2>
+    {% if plans %}
+    <ul>
+        {% for plan in plans %}
+        <li><a href="{% url 'changelog:detail' numero=plan.nom %}">{{ plan.nom }} — {{ plan.titre }}</a></li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>Rien à afficher.</p>
+    {% endif %}
+</section>
+{% endblock %}

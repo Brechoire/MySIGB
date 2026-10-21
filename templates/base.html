@@ -11,6 +11,7 @@
         <nav>
             <ul>
                 <li><a href="{% url 'home:index' %}">Accueil</a></li>
+                <li><a href="{% url 'changelog:index' %}">Suivi</a></li>
             </ul>
         </nav>
     </header>
@@ -21,6 +22,11 @@
 
     <footer>
         <p>MySIGB - Système de gestion de bibliothèque</p>
+        <nav>
+            <ul>
+                <li><a href="{% url 'changelog:index' %}">Suivi</a></li>
+            </ul>
+        </nav>
     </footer>
 </body>
 </html>
