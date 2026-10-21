@@ -17,8 +17,12 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
+from home.views import robots
+
 urlpatterns = [
+    path('robots.txt', robots, name='robots'),
     path('admin/', admin.site.urls),
     path('suivi/', include('changelog.urls')),
+    path('comptes/', include('accounts.urls')),
     path('', include('home.urls')),
 ]

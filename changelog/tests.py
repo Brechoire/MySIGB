@@ -1,9 +1,20 @@
 import tempfile
 from pathlib import Path
 
+from django.contrib.auth import get_user_model
 from django.test import TestCase, Client, override_settings
 
 from changelog.services import list_plans, get_plan, rendre_markdown
+
+
+def _client_connecte():
+    """Client authentifié (la SIGB exige une connexion partout)."""
+    compte = get_user_model().objects.create_user(username="lecteur")
+    compte.force_password_change = False
+    compte.save()
+    client = Client()
+    client.force_login(compte)
+    return client
 
 
 def _creer_plan(dossier: Path, nom: str, titre: str) -> Path:
@@ -52,7 +63,7 @@ class ChangelogVuesTest(TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             with override_settings(BASE_DIR=Path(tmp)):
                 _creer_plan(Path(tmp) / "workflow", "001-premier", "Premier suivi")
-                reponse = Client().get("/suivi/")
+                reponse = _client_connecte().get("/suivi/")
             self.assertEqual(reponse.status_code, 200)
             self.assertContains(reponse, "Premier suivi")
 
@@ -60,7 +71,7 @@ class ChangelogVuesTest(TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             _creer_plan(Path(tmp) / "workflow", "001-premier", "Premier suivi")
             with override_settings(BASE_DIR=Path(tmp)):
-                reponse = Client().get("/suivi/001-premier/")
+                reponse = _client_connecte().get("/suivi/001-premier/")
             self.assertEqual(reponse.status_code, 200)
             self.assertContains(reponse, "Premier suivi")
 
@@ -68,7 +79,7 @@ class ChangelogVuesTest(TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             (Path(tmp) / "workflow").mkdir(parents=True, exist_ok=True)
             with override_settings(BASE_DIR=Path(tmp)):
-                reponse = Client().get("/suivi/999-inexistant/")
+                reponse = _client_connecte().get("/suivi/999-inexistant/")
             self.assertEqual(reponse.status_code, 404)
 
 
@@ -87,12 +98,12 @@ class ChangelogMarkdownVuesTest(TestCase):
         with tempfile.TemporaryDirectory() as tmp:
             _creer_plan(Path(tmp) / "workflow", "001-premier", "Premier suivi")
             with override_settings(BASE_DIR=Path(tmp)):
-                reponse = Client().get("/suivi/001-premier/")
+                reponse = _client_connecte().get("/suivi/001-premier/")
             self.assertEqual(reponse.status_code, 200)
             self.assertContains(reponse, "<h2>Demande</h2>", html=True)
 
     def test_pied_de_page_contient_lien_suivi(self):
-        reponse = Client().get("/")
+        reponse = _client_connecte().get("/")
         self.assertEqual(reponse.status_code, 200)
         contenu = reponse.content.decode()
         self.assertIn("<footer", contenu)

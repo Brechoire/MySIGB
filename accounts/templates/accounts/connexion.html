@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block title %}Connexion — MySIGB{% endblock %}
+
+{% block content %}
+<h1>Connexion</h1>
+<form method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend>Identifiez-vous</legend>
+        {{ form.as_p }}
+    </fieldset>
+    <button type="submit">Se connecter</button>
+</form>
+{% endblock %}

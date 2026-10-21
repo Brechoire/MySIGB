@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block title %}Fiche de {{ compte.username }} — MySIGB{% endblock %}
+
+{% block content %}
+<h1>Fiche de {{ compte.username }}</h1>
+
+<dl>
+    <dt>Identifiant</dt><dd>{{ compte.username }}</dd>
+    <dt>Prénom</dt><dd>{{ compte.first_name|default:"—" }}</dd>
+    <dt>Nom</dt><dd>{{ compte.last_name|default:"—" }}</dd>
+    <dt>Langue</dt><dd>{{ compte.langue }}</dd>
+    <dt>Compte actif</dt><dd>{% if compte.is_active %}Oui{% else %}Non{% endif %}</dd>
+    <dt>Staff</dt><dd>{% if compte.is_staff %}Oui{% else %}Non{% endif %}</dd>
+    <dt>Superuser</dt><dd>{% if compte.is_superuser %}Oui{% else %}Non{% endif %}</dd>
+    <dt>Date de création</dt><dd>{{ compte.date_joined }}</dd>
+    <dt>Dernière connexion</dt><dd>{{ compte.last_login|default:"Jamais" }}</dd>
+    <dt>Changement de mot de passe imposé</dt><dd>{% if compte.force_password_change %}Oui{% else %}Non{% endif %}</dd>
+    <dt>Référence PMB</dt><dd>{{ compte.legacy_userid|default:"—" }}</dd>
+    <dt>Droits PMB bruts</dt><dd>{{ compte.legacy_rights }}</dd>
+</dl>
+
+<h2>Préférences</h2>
+{% for titre, champs in sections %}
+<table>
+    <caption>{{ titre }}</caption>
+    <thead>
+        <tr><th scope="col">Paramètre</th><th scope="col">Valeur</th></tr>
+    </thead>
+    <tbody>
+        {% for libelle, valeur in champs %}
+        <tr><th scope="row">{{ libelle }}</th><td>{{ valeur }}</td></tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endfor %}
+
+<p><a href="{% url 'home:index' %}">Retour à l'accueil</a></p>
+{% endblock %}

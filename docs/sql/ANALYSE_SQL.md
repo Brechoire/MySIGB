@@ -31,4 +31,4 @@ Base PMB (SIGB de bibliotheque) : catalogue (notices/exemplaires/bulletins), aut
 - Retards : voir PMB_DOMAINES.md.
 - Comptes/Finance : voir PMB_DOMAINES.md.
 - Referentiels : voir PMB_DOMAINES.md.
-- Dictionnaire : DICTIONNAIRE_SQL.md ; relations : RELATIONS_SQL.md ; audit : AUDIT_SQL.md.
+- Dictionnaire : DICTIONNAIRE_SQL.md ; relations : RELATIONS_SQL.md (hypotheses applicatives) et RELATIONS_BDD.md (constats issus de la BDD) ; audit : AUDIT_SQL.md.

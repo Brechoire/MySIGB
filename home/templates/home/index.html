@@ -15,4 +15,26 @@
         <li>Suivre les adhérents</li>
     </ul>
 </section>
+
+<section>
+    <h2>Comptes enregistrés</h2>
+    {% if comptes %}
+    <table>
+        <caption>Comptes enregistrés</caption>
+        <thead>
+            <tr><th scope="col">Identifiant</th><th scope="col">Nom complet</th></tr>
+        </thead>
+        <tbody>
+            {% for compte in comptes %}
+            <tr>
+                <td><a href="{% url 'accounts:detail' compte.username %}">{{ compte.username }}</a></td>
+                <td>{{ compte.get_full_name|default:"—" }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>Aucun compte enregistré pour le moment.</p>
+    {% endif %}
+</section>
 {% endblock %}

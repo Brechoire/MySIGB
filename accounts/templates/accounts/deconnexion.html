@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Déconnexion — MySIGB{% endblock %}
+
+{% block content %}
+<h1>Déconnexion</h1>
+<p>Vous êtes déconnecté.</p>
+<p><a href="{% url 'accounts:login' %}">Se reconnecter</a></p>
+{% endblock %}

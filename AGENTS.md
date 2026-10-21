@@ -1,6 +1,6 @@
 # MySIGB — notes agent
 
-Django 6.1 (Python 3.12). SIGB : catalogue, emprunts, adhérents, rôles, API (en construction — pages existantes : `/` (home), `/suivi/` (changelog : suivi workflow + lecteur markdown)).
+Django 6.1 (Python 3.12). SIGB : catalogue, emprunts, adhérents, rôles, API (en construction — pages existantes : `/` (home), `/suivi/` (changelog : suivi workflow + lecteur markdown), `/comptes/` (accounts : connexion, mot de passe forcé à la 1re connexion)).
 
 ## Commandes
 

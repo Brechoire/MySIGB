@@ -12,6 +12,11 @@
             <ul>
                 <li><a href="{% url 'home:index' %}">Accueil</a></li>
                 <li><a href="{% url 'changelog:index' %}">Suivi</a></li>
+                {% if user.is_authenticated %}
+                <li><form method="post" action="{% url 'accounts:logout' %}">{% csrf_token %}<button type="submit">Déconnexion ({{ user.username }})</button></form></li>
+                {% else %}
+                <li><a href="{% url 'accounts:login' %}">Connexion</a></li>
+                {% endif %}
             </ul>
         </nav>
     </header>
